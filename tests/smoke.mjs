@@ -201,7 +201,7 @@ assert.match(css, /max-width: 480px[\s\S]{0,700}\.pricing-plan__recommended/);
 assert.match(css, /max-width: 480px[\s\S]{0,700}pricing-model-note__list\s*\{\s*grid-template-columns:\s*1fr/);
 assert.doesNotMatch(css, /pricing[^\n{]*\{[^}]*position:\s*(?:fixed|sticky)/i, 'no sticky pricing summary');
 assert.doesNotMatch(pricing, /pricing-summary-bar|pricing-footer-summary|pricing-sticky/);
-assert.doesNotMatch(pricing, /฿(?:5,900|10,900|320,000|520,000)/);
+assert.doesNotMatch(pricing, /฿(?:5,900|10,900|225,000|339,000)/);
 
 const addons = html.match(/<section[^>]*id="addons"[^>]*>[\s\S]*?<\/section>/)?.[0] ?? '';
 assert.ok(addons, 'Add-ons section exists');
@@ -273,16 +273,16 @@ const document = {
 vm.runInNewContext(js, { document, Intl, Date });
 assert.equal(pricingModelNote.innerHTML, `<ul class="pricing-model-note__list">${pricingNoteMarkup}</ul>`);
 assert.equal(recommendationText.textContent, 'แนะนำสำหรับองค์กรที่ต้องการเครื่องมือบริหารเพิ่มขึ้น');
-assert.equal(business.textContent, '7,490 บาท/เดือน');
-assert.equal(enterprise.textContent, '10,990 บาท/เดือน');
-assert.match(pricing, /data-package-price="business">7,490 บาท\/เดือน/);
-assert.match(pricing, /data-package-price="enterprise">10,990 บาท\/เดือน/);
+assert.equal(business.textContent, '6,370 บาท/เดือน');
+assert.equal(enterprise.textContent, '9,340 บาท/เดือน');
+assert.match(pricing, /data-package-price="business">6,370 บาท\/เดือน/);
+assert.match(pricing, /data-package-price="enterprise">9,340 บาท\/เดือน/);
 const expected = [
-  ['25', '1,990', '2,990'], ['50', '2,990', '4,490'],
-  ['100', '4,490', '6,490'], ['150', '5,490', '7,990'],
-  ['200', '6,490', '9,490'], ['250', '7,490', '10,990'],
-  ['300', '8,490', '12,490'], ['350', '9,490', '13,990'],
-  ['500', '11,990', '16,990'],
+  ['25', '1,690', '2,540'], ['50', '2,540', '3,820'],
+  ['100', '3,820', '5,520'], ['150', '4,670', '6,790'],
+  ['200', '5,520', '8,070'], ['250', '6,370', '9,340'],
+  ['300', '7,220', '10,620'], ['350', '8,070', '11,890'],
+  ['500', '10,190', '14,440'],
 ];
 for (const [index, [users, businessPrice, enterprisePrice]] of expected.entries()) {
   range.value = String(index);
@@ -308,7 +308,7 @@ range.value = '0'; range.listeners.input();
 steps[0].listeners.click();
 assert.equal(range.value, '0', 'decrease stops at first tier');
 range.value = '4'; range.listeners.input();
-assert.equal(business.textContent, '6,490 บาท/เดือน');
+assert.equal(business.textContent, '5,520 บาท/เดือน');
 modes[1].listeners.click();
 assert.deepEqual([...pricingModelNote.innerHTML.matchAll(/<li>(.*?)<\/li>/g)].map(([, item]) => item), [
   'สิทธิ์ใช้งานระบบตามขอบเขต License',
@@ -318,17 +318,17 @@ assert.deepEqual([...pricingModelNote.innerHTML.matchAll(/<li>(.*?)<\/li>/g)].ma
 ]);
 assert.equal(recommendationText.textContent, 'แนะนำสำหรับองค์กรที่ต้องการเครื่องมือบริหารเพิ่มขึ้น');
 assert.equal(range.value, '4', 'Subscription to License preserves 200 users');
-assert.equal(business.textContent, '฿400,000');
-assert.equal(enterprise.textContent, '฿540,000');
+assert.equal(business.textContent, '฿339,000');
+assert.equal(enterprise.textContent, '฿459,000');
 assert.equal(modes[1].attributes['aria-pressed'], 'true');
 assert.equal(modes[0].attributes['aria-pressed'], 'false');
 assert.equal(currentLabel.textContent, 'ราคา License คำนวณสำหรับ');
 const licenseExpected = [
-  ['25', '220,000', '300,000'], ['50', '260,000', '350,000'],
-  ['100', '320,000', '420,000'], ['150', '360,000', '480,000'],
-  ['200', '400,000', '540,000'], ['250', '440,000', '590,000'],
-  ['300', '480,000', '640,000'], ['350', '520,000', '690,000'],
-  ['500', '600,000', '790,000'],
+  ['25', '189,000', '255,000'], ['50', '219,000', '299,000'],
+  ['100', '269,000', '359,000'], ['150', '309,000', '409,000'],
+  ['200', '339,000', '459,000'], ['250', '375,000', '499,000'],
+  ['300', '409,000', '545,000'], ['350', '439,000', '589,000'],
+  ['500', '509,000', '669,000'],
 ];
 for (const [index, [users, businessPrice, enterprisePrice]] of licenseExpected.entries()) {
   range.value = String(index);
@@ -350,8 +350,8 @@ assert.equal(pricingModelNote.innerHTML, `<ul class="pricing-model-note__list">$
 assert.equal(recommendationText.textContent, 'แนะนำสำหรับองค์กรที่ต้องการเครื่องมือบริหารเพิ่มขึ้น');
 assert.equal(range.value, '5', 'License to Subscription preserves 250 users');
 assert.equal(currentLabel.textContent, 'ราคาปัจจุบันคำนวณสำหรับ');
-assert.equal(business.textContent, '7,490 บาท/เดือน');
-assert.equal(enterprise.textContent, '10,990 บาท/เดือน');
+assert.equal(business.textContent, '6,370 บาท/เดือน');
+assert.equal(enterprise.textContent, '9,340 บาท/เดือน');
 
 assert.match(terms, /<title>ข้อตกลงและเงื่อนไขการใช้บริการ \| MintHRM<\/title>/);
 assert.match(terms, /name="description"/);

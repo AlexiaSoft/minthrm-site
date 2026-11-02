@@ -21,15 +21,15 @@ document.addEventListener('keydown', (event) => {
 document.querySelector('#year').textContent = new Date().getFullYear();
 const hrmPricing = {
   tiers: [
-    { label: '25', business: 1990, enterprise: 2990, businessLicense: 220000, enterpriseLicense: 300000 },
-    { label: '50', business: 2990, enterprise: 4490, businessLicense: 260000, enterpriseLicense: 350000 },
-    { label: '100', business: 4490, enterprise: 6490, businessLicense: 320000, enterpriseLicense: 420000 },
-    { label: '150', business: 5490, enterprise: 7990, businessLicense: 360000, enterpriseLicense: 480000 },
-    { label: '200', business: 6490, enterprise: 9490, businessLicense: 400000, enterpriseLicense: 540000 },
-    { label: '250', business: 7490, enterprise: 10990, businessLicense: 440000, enterpriseLicense: 590000 },
-    { label: '300', business: 8490, enterprise: 12490, businessLicense: 480000, enterpriseLicense: 640000 },
-    { label: '350', business: 9490, enterprise: 13990, businessLicense: 520000, enterpriseLicense: 690000 },
-    { label: '500', business: 11990, enterprise: 16990, businessLicense: 600000, enterpriseLicense: 790000 },
+    { label: '25', business: 1690, enterprise: 2540, businessLicense: 189000, enterpriseLicense: 255000 },
+    { label: '50', business: 2540, enterprise: 3820, businessLicense: 219000, enterpriseLicense: 299000 },
+    { label: '100', business: 3820, enterprise: 5520, businessLicense: 269000, enterpriseLicense: 359000 },
+    { label: '150', business: 4670, enterprise: 6790, businessLicense: 309000, enterpriseLicense: 409000 },
+    { label: '200', business: 5520, enterprise: 8070, businessLicense: 339000, enterpriseLicense: 459000 },
+    { label: '250', business: 6370, enterprise: 9340, businessLicense: 375000, enterpriseLicense: 499000 },
+    { label: '300', business: 7220, enterprise: 10620, businessLicense: 409000, enterpriseLicense: 545000 },
+    { label: '350', business: 8070, enterprise: 11890, businessLicense: 439000, enterpriseLicense: 589000 },
+    { label: '500', business: 10190, enterprise: 14440, businessLicense: 509000, enterpriseLicense: 669000 },
     { label: '500+', business: null, enterprise: null, businessLicense: null, enterpriseLicense: null },
   ],
 };
